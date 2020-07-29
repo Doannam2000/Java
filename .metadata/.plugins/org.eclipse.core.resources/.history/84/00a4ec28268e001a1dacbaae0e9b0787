@@ -1,0 +1,63 @@
+package Object;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
+public class RunMain {
+	public static boolean GhiFile(Object x,String path)
+	{
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(path);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(x);
+			oos.close();
+			fos.close();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return false;
+	}
+	public static Object DocFile(String path)
+	{
+		try
+		{
+			FileInputStream fis = new FileInputStream(path);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			Object x = ois.readObject();
+			ois.close();
+			fis.close();
+			return ois;
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	public static void main(String[] args) 
+	{
+		ArrayList<SinhVien> sv = new ArrayList<SinhVien>();
+		sv.add(new SinhVien("Nam",10));
+		sv.add(new SinhVien("hihi",9));
+		sv.add(new SinhVien("cái gì đó",8));
+		boolean x = GhiFile(sv,"F:/Code/Java/ObjectFile.dat");
+		if(x==true)
+			System.out.println("Được rùi nè");
+		else
+			System.out.println("Đéo được rồi thằng ngu kia");
+		Object data = DocFile("F:/Code/Java/ObjectFile.dat");		
+		ArrayList<SinhVien> b=(ArrayList<SinhVien>) data;
+		for(SinhVien m:b)
+		{
+			System.out.println(m.getTen() + "/t" +m.getDiem());
+		}
+	}
+	
+}

@@ -1,0 +1,4 @@
+throw dùng trong thân của phương thức
+throws InterruptedException dùng ngay trên đầu 
+của phương thức như kế thừa imple v.v
+ 
